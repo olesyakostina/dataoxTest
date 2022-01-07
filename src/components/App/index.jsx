@@ -1,10 +1,12 @@
 import React from "react";
+import PostsList from "./../PostsList/index.jsx";
 import "./index.less";
+
 
 const App = () => {
     return (
         <div className="app">
-            <h1>My react</h1>
+            <PostsList />
         </div>
     );
 };
