@@ -4,11 +4,12 @@ import { render } from "react-dom";
 import App from "./components/App/index.jsx";
 import "antd/dist/antd.css";
 
+
 import { Provider } from "react-redux";
 import store from "./store/index.jsx";
 
 render(
-    <Provider store={store}>
+    <Provider store={store}>       
         <App />
     </Provider>,
     document.getElementById("root")
