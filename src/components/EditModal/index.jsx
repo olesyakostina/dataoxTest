@@ -1,37 +1,43 @@
 import React, { useState } from "react";
 import "./index.less";
 
-const EditModal = (props) => {
-    // const [editTitleValue, setEditTitleValue] = useState("");
-    // const [editBodyValue, setEditBodyValue] = useState("");
+const EditModal = ({ editPost, btnModalClose, editTopic }) => {
+    const [editTitleValue, setEditTitleValue] = useState(editPost.title);
+    const [editBodyValue, setEditBodyValue] = useState(editPost.body);
 
-    // const btnModalClose = () => {};
-    // const btnEditSave = () => {};
+    const btnEditSave = () => {
+        const newPost = {
+            ...editPost,
+            body: editBodyValue,
+            title: editTitleValue,
+        };
+        // console.log(newPost);
+        editTopic(newPost);
+        btnModalClose();
+    };
 
-    // const getTitleInputValue = () => {};
-    // const getBodyInputValue = () => {};
     return (
         <div className="modal-wrapper">
             <div className="edit-modal-wrapper">
                 <div className="window-btn__close">
-                    <button onClick={props.btnModalClose}>X</button>
+                    <button onClick={btnModalClose}>X</button>
                 </div>
                 <div className="edit-inp">
                     <input
                         type="text"
                         className="edit-inp"
-                        // value={editTitleValue}
-                        // onChange={getTitleInputValue}
+                        value={editTitleValue}
+                        onChange={(e) => setEditTitleValue(e.target.value)}
                     />
                     <input
                         type="text"
                         className="edit-inp"
-                        // value={editBodyValue}
-                        // onChange={getBodyInputValue}
+                        value={editBodyValue}
+                        onChange={(e) => setEditBodyValue(e.target.value)}
                     />
                     <button
                         className="description-wrapper_btn"
-                        // onClick={btnEditSave}
+                        onClick={btnEditSave}
                     >
                         Сохранить
                     </button>

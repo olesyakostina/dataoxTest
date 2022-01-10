@@ -4,13 +4,10 @@ import "./index.less";
 import "antd/dist/antd.css";
 import Header from "../Header/index.jsx";
 
-import Pagination from "./../Pagination/index.jsx";
-
 const App = () => {
     return (
         <div className="app">
             <Header />
-            <Pagination />
             <PostsList />
         </div>
     );
