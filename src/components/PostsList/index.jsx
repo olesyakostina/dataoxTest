@@ -12,11 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Card, Button, Pagination } from "antd";
 import "antd/dist/antd.css";
-import {
-    DeleteOutlined,
-    EditOutlined,
-    // SearchOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const PostsList = () => {
     //openClose Modal
@@ -30,7 +26,8 @@ const PostsList = () => {
     let [currentPage, setCurrentPage] = useState(1);
     let [search, setSearch] = useState("");
 
-    const PAGE_SIZE = 5;
+    // pagination
+    const PAGE_SIZE = 8;
 
     const changePage = (page, pageSize) => {
         console.log(page, pageSize);
@@ -41,7 +38,7 @@ const PostsList = () => {
         dispatch(loadTopics(currentPage, PAGE_SIZE));
     }, [currentPage]);
 
-    //-----------------------
+    // modal
     const openEditModal = (post) => {
         console.log(post);
         setEditPost(post);
@@ -84,30 +81,25 @@ const PostsList = () => {
                 />
             </div>
 
-            <Pagination
-                total={total}
-                pageSize={PAGE_SIZE}
-                onChange={changePage}
-                current={currentPage}
-            />
-            <Card>
-                <div className="card">
-                    {topics.length > 0
-                        ? topics
-                              .filter((post) => {
-                                  if (search === "") {
-                                      return post;
-                                  } else if (
-                                      post.title
-                                          .toLowerCase()
-                                          .includes(search.toLowerCase())
-                                  ) {
-                                      return post;
-                                  }
-                              })
-                              .map((post) => (
+            <div className="card">
+                {topics.length > 0
+                    ? topics
+                          .filter((post) => {
+                              if (search === "") {
+                                  return post;
+                              } else if (
+                                  post.title
+                                      .toLowerCase()
+                                      .includes(search.toLowerCase())
+                              ) {
+                                  return post;
+                              }
+                          })
+
+                          .map((post) => (
+                              <div className="card-elem">
                                   <div key={post.id}>
-                                      <p> {post.title}</p>
+                                      <h1> {post.title}</h1>
                                       <p> {post.body}</p>
                                       <div className="btn_icons">
                                           <div>
@@ -135,10 +127,19 @@ const PostsList = () => {
                                           </div>
                                       </div>
                                   </div>
-                              ))
-                        : null}
-                </div>
-            </Card>
+                              </div>
+                          ))
+                    : null}
+            </div>
+
+            <div className="pagination">
+                <Pagination
+                    total={total}
+                    pageSize={PAGE_SIZE}
+                    onChange={changePage}
+                    current={currentPage}
+                />
+            </div>
         </div>
     );
 };
